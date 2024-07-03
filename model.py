@@ -59,8 +59,6 @@ def model_select(model):
         return KNeighborsClassifier(n_neighbors=1)
     elif model == 'NaiveBayes':
         return GaussianNB()
-    elif model == 'SVM':
-        return SVC(kernel='linear', probability=True)
     elif model == 'GradientBoosting':
         return GradientBoostingClassifier()
     elif model == 'DecisionTree':
@@ -74,7 +72,7 @@ def plot_correlation_matrix(df, title):
     plt.title(title)
     plt.show()
 
-def train(hasImputer=True, model="KNN", column_threshold=0.9, correlation_threshold=0.8):
+def train(model="KNN", column_threshold=0.9, correlation_threshold=0.8):
     data_file_path = "data.csv"
 
     data = pd.read_csv(data_file_path, sep=';')
@@ -87,7 +85,7 @@ def train(hasImputer=True, model="KNN", column_threshold=0.9, correlation_thresh
     X = data.drop(columns=['class'])
     y = data['class']
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, stratify=y)
 
 
 
