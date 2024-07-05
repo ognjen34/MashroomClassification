@@ -54,17 +54,15 @@ def model_select(model):
     if model == 'RandomForest':
         return RandomForestClassifier(n_estimators=100, random_state=42)
     elif model == 'LogisticRegression':
-        return LogisticRegression(max_iter=1000)
+        return LogisticRegression(max_iter=1000, solver='lbfgs')
     elif model == 'KNN':
         return KNeighborsClassifier(n_neighbors=1)
     elif model == 'NaiveBayes':
         return GaussianNB()
     elif model == 'GradientBoosting':
-        return GradientBoostingClassifier()
+        return GradientBoostingClassifier(n_estimators=100, learning_rate=0.1)
     elif model == 'DecisionTree':
         return DecisionTreeClassifier()
-    
-
 def plot_correlation_matrix(df, title):
     plt.figure(figsize=(12, 8))
     correlation_matrix = df.corr()
@@ -113,5 +111,8 @@ def train(model="KNN", column_threshold=0.9, correlation_threshold=0.8):
 
 if __name__ == "__main__":
     train()
-
-
+    train(model="LogisticRegression")
+    train(model="RandomForest")
+    train(model="NaiveBayes")
+    train(model="GradientBoosting")
+    train(model="DecisionTree")
